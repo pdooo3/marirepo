@@ -9,7 +9,7 @@ import Footer from "../Component/Footer";
 
 function home() {
   return (
-    <main className="font-vazir text-lg relative flex flex-col w-full p-2 md:p-6">
+    <main className="font-vazir text-lg relative flex flex-col w-full p-2 md:p-16">
       <HomePage />
 
       {/* cards && box first page */}

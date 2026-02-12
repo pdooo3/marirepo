@@ -1,7 +1,9 @@
 "use client";
-import { useEffect, useRef } from "react";
+
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import { EmblaControls } from "../../Component/EmblaCntrols";
+
 type Slide = {
   id: number;
   pic: string;
@@ -9,56 +11,41 @@ type Slide = {
   text: string;
   price: number;
 };
-export default function Card({ slides = [] }: { slides: Slide[] }) {
+
+type CardProps = {
+  slides?: Slide[];
+};
+
+export default function Card({ slides = [] }: CardProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
-  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (!emblaApi) return;
-
-    const play = () => {
-      if (autoplayRef.current) clearTimeout(autoplayRef.current);
-
-      autoplayRef.current = setTimeout(() => {
-        emblaApi.scrollNext();
-        play();
-      }, 3000);
-    };
-
-    play();
-
-    const onUserScroll = () => play();
-    emblaApi.on("pointerDown", onUserScroll);
-    emblaApi.on("dragStart" as any, onUserScroll);
-
-    return () => {
-      if (autoplayRef.current) clearTimeout(autoplayRef.current);
-      emblaApi.off("pointerDown", onUserScroll);
-      emblaApi.off("dragStart" as any, onUserScroll);
-    };
-  }, [emblaApi]);
-
+  if (!slides.length) return null;
+  const {} = EmblaControls(emblaApi, { autoplay: true });
   return (
     <div ref={emblaRef} className="overflow-hidden">
       <div className="flex">
-        {slides?.map((slide, index) => (
+        {slides.map((slide) => (
           <div
-            key={index}
-            className="flex-shrink-0  w-96 md:w-1/2 lg:w-1/3 p-4"
+            key={slide.id}
+            className="flex-shrink-0 w-96 md:w-1/2 lg:w-1/3 p-4"
           >
-            <div className="flex flex-row shadow-lg w-full rounded-sm">
-              <div className="relative flex w-2/6 max-sm:w-4/6 h-30 ">
+            <div className="flex shadow-lg w-full rounded-md">
+              {/* Image */}
+              <div className="relative w-2/6 max-sm:w-4/6 h-32">
                 <Image
                   src={slide.pic}
+                  alt={slide.title}
                   fill
-                  className="object-cover p-2 rounded-2xl"
-                  alt="card-pic"
+                  sizes="(max-width: 640px) 66vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover p-2 rounded-xl"
                 />
               </div>
-              <div className="pr-5 pt-4 text-right w-4/6">
-                <h3 className="pb-2">{slide.title}</h3>
+
+              {/* Content */}
+              <div className="w-4/6 pr-5 pt-4 text-right">
+                <h3 className="font-semibold pb-1">{slide.title}</h3>
                 <p>{slide.text}</p>
-                <p>{slide.price}</p>
+                <p className="mt-2">{slide.price}</p>
               </div>
             </div>
           </div>
