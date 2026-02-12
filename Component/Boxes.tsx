@@ -1,29 +1,17 @@
-"use client";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
-import { useState } from "react";
 import Card from "../app/Card/page";
 import Image from "next/image";
 
 export default function Boxes() {
-  const cards = [
-    { id: 1, title: "رهن", text: "زمین", price: 555000 },
-    { id: 2, title: "خرید", text: "خانه", price: 200000 },
-    { id: 3, title: "wow", text: "home", price: 199000 },
+  const slides = [
+    { id: 1, pic: "/a.jpeg", title: "رهن", text: "زمین", price: 555000 },
+    { id: 2, pic: "/b.jpeg", title: "خرید", text: "خانه", price: 200000 },
+    { id: 3, pic: "/c.jpeg", title: "wow", text: "home", price: 199000 },
   ];
-  const [index, setIndex] = useState(0);
 
-  // const paginate = (direction: number) => {
-  //   setIndex((prev) => {
-  //     const newIndex = prev + direction;
-  //     if (newIndex < 0) return cards.length - 1;
-  //     if (newIndex >= cards.length) return 0;
-  //     return newIndex;
-  //   });
-  // };
   return (
     <div className="flex w-full flex-col md:flex-row space-x-5 overflow-hidden">
       <div className="relative p-3 w-full md:w-1/2 h-40 overflow-hidden">
-        <Card {...cards[index]} />
+        <Card slides={slides} />
       </div>
 
       <div className="flex flex-row w-full h-40 p-3 space-x-2">
