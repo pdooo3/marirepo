@@ -21,6 +21,7 @@ export default function Card({ slides = [] }: CardProps) {
 
   if (!slides.length) return null;
   const {} = EmblaControls(emblaApi, { autoplay: true });
+
   return (
     <div ref={emblaRef} className="overflow-hidden">
       <div className="flex">

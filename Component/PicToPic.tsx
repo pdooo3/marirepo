@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function PicToPic() {
   return (
-    <div className="relative flex w-full h-100 md:h-[520px] p-2 bg-cover bg-center mt-10">
+    <div className="relative flex w-full h-100 md:h-[520px] pb-5 pl-3 pr-3 bg-cover bg-center mt-10">
       <Image
         src="/a.jpeg"
         height={6700}
