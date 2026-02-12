@@ -24,11 +24,8 @@ export default function Card({ slides = [] }: CardProps) {
   return (
     <div ref={emblaRef} className="overflow-hidden">
       <div className="flex">
-        {slides.map((slide) => (
-          <div
-            key={slide.id}
-            className="flex-shrink-0 w-96 md:w-1/2 lg:w-1/3 p-4"
-          >
+        {slides?.map((slide) => (
+          <div key={slide.id} className="shrink-0 w-96 md:w-1/2 lg:w-1/3 p-4">
             <div className="flex shadow-lg w-full rounded-md">
               {/* Image */}
               <div className="relative w-2/6 max-sm:w-4/6 h-32">

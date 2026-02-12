@@ -29,7 +29,7 @@ export default function SlideForth() {
         <div className="relative w-1/2">
           {/* DOTS */}
           <div className="flex justify-start gap-2 mt-3 ml-3">
-            {slides.map((_, index) => (
+            {slides?.map((_, index) => (
               <button
                 key={index}
                 onClick={() => scrollTo(index)}
@@ -58,7 +58,7 @@ export default function SlideForth() {
 
         <div ref={emblaRef} className="overflow-hidden w-1/2 h-full">
           <div className="flex h-full">
-            {slides.map((src, index) => (
+            {slides?.map((src, index) => (
               <div key={index} className="relative flex-[0_0_100%] h-full">
                 <Image
                   src={src}
